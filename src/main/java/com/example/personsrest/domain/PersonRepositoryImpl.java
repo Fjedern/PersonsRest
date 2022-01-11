@@ -2,7 +2,6 @@ package com.example.personsrest.domain;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
 
 import java.util.*;
 
@@ -18,7 +17,11 @@ public class PersonRepositoryImpl implements PersonRepository{
 
     @Override
     public Optional<Person> findById(String id) {
-        return Optional.empty();
+        if (persons.containsKey(id)){
+            return Optional.of(persons.get(id));
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
