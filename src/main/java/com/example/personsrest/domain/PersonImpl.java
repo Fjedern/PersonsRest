@@ -9,14 +9,15 @@ public class PersonImpl implements Person{
 
     String id;
     String name;
-    String age;
     String city;
+    int age;
+    List<String> groups;
 
-    public PersonImpl(String id, String name, String age, String city) {
+    public PersonImpl(String id, String name, String city, int age) {
         this.id = id;
         this.name = name;
-        this.age = age;
         this.city = city;
+        this.age = age;
     }
 
     @Override

@@ -4,20 +4,25 @@ import com.example.personsrest.domain.Person;
 import com.example.personsrest.domain.PersonImpl;
 import com.example.personsrest.domain.PersonRepository;
 import com.example.personsrest.remote.GroupRemote;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
+@AllArgsConstructor
 public class PersonService {
+
     private PersonRepository personRepository;
     private GroupRemote groupRemote;
 
-    /*public Person create(Person person) {
-        PersonImpl createdPerson = new PersonImpl("1", "filip", "22", "malmo");
-        return createdPerson;
-    }*/
-
     public Person create() {
-        PersonImpl createdPerson = new PersonImpl("1", "filip", "22", "malmo");
-        return createdPerson;
+        PersonImpl createdPerson = new PersonImpl("1", "filip", "malmo", 22);
+        return personRepository.save(createdPerson);
     }
+
+    public List<Person> findAll() {
+        return personRepository.findAll();
+    }
+
 }
