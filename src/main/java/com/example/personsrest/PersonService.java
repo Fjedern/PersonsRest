@@ -1,5 +1,6 @@
 package com.example.personsrest;
 
+import com.example.personsrest.domain.CreatePerson;
 import com.example.personsrest.domain.Person;
 import com.example.personsrest.domain.PersonImpl;
 import com.example.personsrest.domain.PersonRepository;
@@ -17,8 +18,8 @@ public class PersonService {
     private PersonRepository personRepository;
     private GroupRemote groupRemote;
 
-    public Person create(Person person) {
-        PersonImpl createdPerson = new PersonImpl();
+    public Person create(CreatePerson createPerson) {
+        PersonImpl createdPerson = new PersonImpl(createPerson.getName(), createPerson.getCity(), createPerson.getAge());
         return personRepository.save(createdPerson);
     }
 

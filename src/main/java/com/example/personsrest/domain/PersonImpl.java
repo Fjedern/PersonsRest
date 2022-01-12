@@ -20,6 +20,12 @@ public class PersonImpl implements Person{
         this.age = age;
     }
 
+    public PersonImpl(String name, String city, int age) {
+        this.name = name;
+        this.city = city;
+        this.age = age;
+    }
+
     @Override
     public String getId() {
         return null;

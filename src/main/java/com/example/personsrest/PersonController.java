@@ -1,14 +1,12 @@
 package com.example.personsrest;
 
+import com.example.personsrest.domain.CreatePerson;
 import com.example.personsrest.domain.Person;
 import com.example.personsrest.domain.PersonDTO;
 import com.example.personsrest.domain.PersonRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,9 +31,10 @@ public class PersonController {
         return toDTO(personService.findById(id));
     }
 
-
-    /*@PostMapping
-    public Person create() {return personService.create();}*/
+    @PostMapping
+    public PersonDTO create(@RequestBody CreatePerson createPerson) {
+        return toDTO(personService.create(createPerson));
+    }
 
     private PersonDTO toDTO(Person person) {
         return new PersonDTO(person.getId(), person.getName(), person.getCity(), person.getAge(), person.getGroups());
