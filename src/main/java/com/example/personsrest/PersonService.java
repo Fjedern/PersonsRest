@@ -17,8 +17,8 @@ public class PersonService {
     private PersonRepository personRepository;
     private GroupRemote groupRemote;
 
-    public Person create() {
-        PersonImpl createdPerson = new PersonImpl("1", "filip", "malmo", 22);
+    public Person create(Person person) {
+        PersonImpl createdPerson = new PersonImpl();
         return personRepository.save(createdPerson);
     }
 
