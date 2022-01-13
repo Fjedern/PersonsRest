@@ -1,9 +1,6 @@
 package com.example.personsrest;
 
-import com.example.personsrest.domain.CreatePerson;
-import com.example.personsrest.domain.Person;
-import com.example.personsrest.domain.PersonDTO;
-import com.example.personsrest.domain.PersonRepositoryImpl;
+import com.example.personsrest.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +32,18 @@ public class PersonController {
     public PersonDTO create(@RequestBody CreatePerson createPerson) {
         return toDTO(personService.create(createPerson));
     }
+
+    @PutMapping("/{id}")
+    public PersonDTO update(@PathVariable("id") String id, @RequestBody UpdatePerson updatePerson) {
+        return toDTO(
+                    personService.update(
+                            id,
+                            updatePerson.getName(),
+                            updatePerson.getCity(),
+                            updatePerson.getAge()));
+
+    }
+
 
     private PersonDTO toDTO(Person person) {
         return new PersonDTO(person.getId(), person.getName(), person.getCity(), person.getAge(), person.getGroups());

@@ -31,4 +31,13 @@ public class PersonService {
         return personRepository.findById(id).orElse(null);
     }
 
+    public Person update(String id, String name, String city, int age) {
+        Person updatePerson = personRepository.findById(id).orElse(null);
+        updatePerson.setName(name);
+        updatePerson.setCity(city);
+        updatePerson.setAge(age);
+
+        return personRepository.save(updatePerson);
+    }
+
 }
