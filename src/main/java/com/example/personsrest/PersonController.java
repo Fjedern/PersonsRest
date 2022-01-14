@@ -44,6 +44,11 @@ public class PersonController {
 
     }
 
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") String id){
+        personService.delete(id);
+    }
+
 
     private PersonDTO toDTO(Person person) {
         return new PersonDTO(person.getId(), person.getName(), person.getCity(), person.getAge(), person.getGroups());

@@ -33,11 +33,19 @@ public class PersonService {
 
     public Person update(String id, String name, String city, int age) {
         Person updatePerson = personRepository.findById(id).orElse(null);
+        assert updatePerson != null;
         updatePerson.setName(name);
         updatePerson.setCity(city);
         updatePerson.setAge(age);
 
         return personRepository.save(updatePerson);
+    }
+
+    public void delete(String id) {
+        if(id != null){
+            personRepository.delete(id);
+        }
+
     }
 
 }
