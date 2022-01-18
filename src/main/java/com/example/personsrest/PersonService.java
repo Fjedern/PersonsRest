@@ -7,6 +7,7 @@ import com.example.personsrest.domain.PersonRepository;
 import com.example.personsrest.remote.GroupRemote;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,4 +49,10 @@ public class PersonService {
 
     }
 
+    public Person addGroup(String id, String groupName) {
+        Person person = personRepository.findById(id).orElse(null);
+        String groupId = groupRemote.createGroup(groupName);
+        person.addGroup(groupId);
+        return personRepository.save(person);
+    }
 }

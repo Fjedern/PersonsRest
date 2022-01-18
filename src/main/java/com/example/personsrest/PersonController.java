@@ -1,6 +1,8 @@
 package com.example.personsrest;
 
 import com.example.personsrest.domain.*;
+import com.example.personsrest.remote.GroupRemote;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +16,12 @@ import java.util.stream.Collectors;
 public class PersonController {
 
     private final PersonService personService;
+    private GroupRemote groupRemote;
 
     @Autowired
-    public PersonController(PersonService personService) {
+    public PersonController(PersonService personService, GroupRemote groupRemote) {
         this.personService = personService;
+        this.groupRemote = groupRemote;
     }
 
     @GetMapping()
@@ -49,8 +53,18 @@ public class PersonController {
         personService.delete(id);
     }
 
+    @PutMapping("/{id}/addGroup/{groupName}")
+    public PersonDTO addGroup(@PathVariable("id") String id, @PathVariable("groupName") String groupName){
+        return toDTO(personService.addGroup(id, groupName));
+    }
+
 
     private PersonDTO toDTO(Person person) {
-        return new PersonDTO(person.getId(), person.getName(), person.getCity(), person.getAge(), person.getGroups());
+        return new PersonDTO(
+                person.getId(),
+                person.getName(),
+                person.getCity(),
+                person.getAge(),
+                person.getGroups().stream().map(name -> groupRemote.getNameById(name)).collect(Collectors.toList()));
     }
 }

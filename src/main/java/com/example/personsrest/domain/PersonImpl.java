@@ -73,12 +73,12 @@ public class PersonImpl implements Person{
 
     @Override
     public List<String> getGroups() {
-        return null;
+        return groups;
     }
 
     @Override
     public void addGroup(String groupId) {
-
+        groups.add(groupId);
     }
 
     @Override
