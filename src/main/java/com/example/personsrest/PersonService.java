@@ -55,4 +55,10 @@ public class PersonService {
         person.addGroup(groupId);
         return personRepository.save(person);
     }
+
+    public Person removeGroup(String id, String groupId) {
+        Person person = personRepository.findById(id).orElse(null);
+        person.removeGroup(groupId);
+        return personRepository.save(person);
+    }
 }

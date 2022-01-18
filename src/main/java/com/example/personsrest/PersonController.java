@@ -58,6 +58,10 @@ public class PersonController {
         return toDTO(personService.addGroup(id, groupName));
     }
 
+    @DeleteMapping("/{id}/removeGroup/{groupId}")
+    public PersonDTO removeGroup(@PathVariable("id") String id, @PathVariable("groupId") String groupId) {
+        return toDTO(personService.removeGroup(id, groupId));
+    }
 
     private PersonDTO toDTO(Person person) {
         return new PersonDTO(

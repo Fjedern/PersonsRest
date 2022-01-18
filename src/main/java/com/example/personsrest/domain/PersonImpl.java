@@ -83,6 +83,6 @@ public class PersonImpl implements Person{
 
     @Override
     public void removeGroup(String groupId) {
-
+        groups.remove(groupId);
     }
 }
