@@ -25,7 +25,15 @@ public class PersonController {
     }
 
     @GetMapping()
-    public List<PersonDTO> getAllPersons() { return personService.findAll().stream().map(this::toDTO).collect(Collectors.toList()); }
+    public List<PersonDTO> getAllPersons(@RequestParam(required = false) String search) {
+        if(search == null) {
+            return personService.findAll().stream().map(this::toDTO).collect(Collectors.toList());
+        } else {
+            return personService.findAllByNameOrCityContaining(search, 0, 10)
+                    .map(this::toDTO).stream().collect(Collectors.toList());
+        }
+
+    }
 
     @GetMapping("/{id}")
     public PersonDTO get(@PathVariable("id") String id) {

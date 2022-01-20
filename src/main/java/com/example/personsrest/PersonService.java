@@ -6,6 +6,10 @@ import com.example.personsrest.domain.PersonImpl;
 import com.example.personsrest.domain.PersonRepository;
 import com.example.personsrest.remote.GroupRemote;
 import lombok.AllArgsConstructor;
+import org.apache.catalina.mapper.Mapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -60,5 +64,11 @@ public class PersonService {
         Person person = personRepository.findById(id).orElse(null);
         person.removeGroup(groupId);
         return personRepository.save(person);
+    }
+
+    public Page<Person> findAllByNameOrCityContaining(String search, int pageNumber, int pageSize) {
+        Pageable page = PageRequest.of(pageNumber, pageSize);
+
+        return personRepository.findAllByNameContainingOrCityContaining(search, search, page);
     }
 }

@@ -1,5 +1,8 @@
 package com.example.personsrest.remote;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -10,6 +13,10 @@ public class GroupRemoteImpl implements GroupRemote{
 
     WebClient webClient;
 
+    /*public GroupRemoteImpl(WebClient webClient) {
+        this.webClient = WebClient.create("https://groups.edu.sensera.se/");
+    }
+
     @Override
     public String getNameById(String groupId) {
         return webClient.get()
@@ -19,6 +26,11 @@ public class GroupRemoteImpl implements GroupRemote{
                 .retrieve()
                 .bodyToMono(Group.class);
         ;
+    }*/
+
+    @Override
+    public String getNameById(String groupId) {
+        return null;
     }
 
     @Override
@@ -29,5 +41,17 @@ public class GroupRemoteImpl implements GroupRemote{
     @Override
     public String removeGroup(String name) {
         return null;
+    }
+
+    @Value
+    static class Group {
+        String id;
+        String name;
+
+        @JsonCreator
+        public Group(@JsonProperty("id") String id, @JsonProperty("name") String name) {
+            this.id = id;
+            this.name = name;
+        }
     }
 }
