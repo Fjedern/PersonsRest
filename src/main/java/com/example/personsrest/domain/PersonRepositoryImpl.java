@@ -12,9 +12,9 @@ public class PersonRepositoryImpl implements PersonRepository{
     Map<String, Person> persons = new HashMap<String, Person>();
 
     public PersonRepositoryImpl() {
-        Person person1 = new PersonImpl("1", "Arne Anka", "malmo", 22);
+        /*Person person1 = new PersonImpl("1", "Arne Anka", "malmo", 22);
 
-        persons.put(person1.getId(), person1);
+        persons.put(person1.getId(), person1);*/
     }
 
     @Override
@@ -51,7 +51,8 @@ public class PersonRepositoryImpl implements PersonRepository{
 
     @Override
     public Person save(Person person) {
-        return persons.put(person.getId(), person);
+        persons.put(person.getId(), person);
+        return person;
     }
 
     @Override

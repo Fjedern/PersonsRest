@@ -3,62 +3,23 @@ package com.example.personsrest.domain;
 import lombok.Data;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
 public class PersonImpl implements Person{
 
-    String id;
-    String name;
-    String city;
-    int age;
-    List<String> groups;
+    private String id;
+    private String name;
+    private String city;
+    private int age;
+    private List<String> groups;
 
-    public PersonImpl(String id, String name, String city, int age) {
-        this.id = id;
+    public PersonImpl(String name, String city, int age, List<String> groups) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.city = city;
         this.age = age;
-    }
-
-    public PersonImpl(String name, String city, int age) {
-        this.name = name;
-        this.city = city;
-        this.age = age;
-    }
-
-    @Override
-    public String getId() {
-        return null;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    @Override
-    public void setName(String name) {
-
-    }
-
-    @Override
-    public int getAge() {
-        return 0;
-    }
-
-    @Override
-    public void setAge(int age) {
-
-    }
-
-    @Override
-    public String getCity() {
-        return null;
-    }
-
-    @Override
-    public void setCity(String city) {
-
+        this.groups = groups;
     }
 
     @Override
@@ -73,16 +34,16 @@ public class PersonImpl implements Person{
 
     @Override
     public List<String> getGroups() {
-        return groups;
+        return this.groups == null ? List.of() : this.groups;
     }
 
     @Override
     public void addGroup(String groupId) {
-        groups.add(groupId);
+        this.groups.add(groupId);
     }
 
     @Override
     public void removeGroup(String groupId) {
-        groups.remove(groupId);
+        this.groups.removeIf(groupId::equalsIgnoreCase);
     }
 }
