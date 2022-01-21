@@ -79,4 +79,13 @@ public class PersonController {
                 person.getAge(),
                 person.getGroups().stream().map(name -> groupRemote.getNameById(name)).collect(Collectors.toList()));
     }
+
+    private PersonDTO toDTO2(Person person) {
+        return new PersonDTO(
+                person.getId(),
+                person.getName(),
+                person.getCity(),
+                person.getAge(),
+                person.getGroups().stream().map(name -> groupRemote.removeGroup(name)).collect(Collectors.toList()));
+    }
 }

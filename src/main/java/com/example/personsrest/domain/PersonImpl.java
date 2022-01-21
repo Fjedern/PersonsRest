@@ -22,6 +22,9 @@ public class PersonImpl implements Person{
         this.groups = groups;
     }
 
+    public PersonImpl() {
+    }
+
     @Override
     public boolean isActive() {
         return false;
@@ -34,7 +37,7 @@ public class PersonImpl implements Person{
 
     @Override
     public List<String> getGroups() {
-        return this.groups == null ? List.of() : this.groups;
+        return this.groups;
     }
 
     @Override
@@ -44,6 +47,6 @@ public class PersonImpl implements Person{
 
     @Override
     public void removeGroup(String groupId) {
-        this.groups.removeIf(groupId::equalsIgnoreCase);
+        this.groups.remove(groupId);
     }
 }

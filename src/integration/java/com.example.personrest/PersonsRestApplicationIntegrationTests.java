@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("integrationtest")
+@ActiveProf iles("integrationtest")
 public class PersonsRestApplicationIntegrationTests {
     @LocalServerPort
     int port;

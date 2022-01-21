@@ -46,7 +46,6 @@ public class PersonsRestApplicationIntegrationTests {
 
         // When
         person1 = personAPI.removeGroup(person1.getId(), person1.getGroups().get(0));
-
         // Then
         assertEquals(0, person1.getGroups().size());
     }

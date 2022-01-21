@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 public class GroupRemoteImpl implements GroupRemote{
 
     private static final String BASE_URL = "/api/groups/";
-    private static final String BASE_URL2 = "/api/groups";
+    private static final String ADD_NEW_GROUP = "/api/groups";
 
     WebClient webClient;
     KeyCloakToken token;
@@ -35,7 +35,7 @@ public class GroupRemoteImpl implements GroupRemote{
     @Override
     public String createGroup(String name) {
         return webClient.post()
-                .uri(BASE_URL2)
+                .uri(ADD_NEW_GROUP)
                 .header("Authorization", "Bearer " + token.getAccessToken())
                 .header(HttpHeaders.CONTENT_TYPE , MediaType.APPLICATION_JSON_VALUE)
                 .body(BodyInserters.fromValue(new CreateGroup(name)))
@@ -47,7 +47,9 @@ public class GroupRemoteImpl implements GroupRemote{
 
     @Override
     public String removeGroup(String name) {
-        return webClient.delete().uri(BASE_URL + name)
+        return webClient
+                .delete()
+                .uri("api/groups/" + name)
                 .header("Authorization", "Bearer " + token.getAccessToken())
                 .retrieve()
                 .bodyToMono(String.class)

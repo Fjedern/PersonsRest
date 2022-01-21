@@ -57,13 +57,20 @@ public class PersonService {
     public Person addGroup(String id, String groupName) {
         Person person = personRepository.findById(id).orElse(null);
         String groupId = groupRemote.createGroup(groupName);
+        System.out.println(groupId);
         person.addGroup(groupId);
+        System.out.println(person);
         return personRepository.save(person);
     }
 
     public Person removeGroup(String id, String groupId) {
         Person person = personRepository.findById(id).orElse(null);
-        person.removeGroup(groupId);
+        if(groupId.length() >= 30){
+            person.removeGroup(groupId);    //name
+        } else {
+            person.getGroups().removeIf(g -> groupRemote.getNameById(g).equals(groupId)); //id
+        }
+
         return personRepository.save(person);
     }
 
