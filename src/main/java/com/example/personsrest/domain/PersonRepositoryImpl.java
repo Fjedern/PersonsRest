@@ -19,11 +19,7 @@ public class PersonRepositoryImpl implements PersonRepository{
 
     @Override
     public Optional<Person> findById(String id) {
-        if (persons.containsKey(id)){
-            return Optional.of(persons.get(id));
-        } else {
-            return Optional.empty();
-        }
+        return Optional.ofNullable(persons.get(id));
     }
 
     @Override

@@ -2,20 +2,17 @@ package com.example.personsrest;
 
 import com.example.personsrest.domain.CreatePerson;
 import com.example.personsrest.domain.Person;
-import com.example.personsrest.domain.PersonImpl;
+import com.example.personsrest.domain.PersonEntity;
 import com.example.personsrest.domain.PersonRepository;
 import com.example.personsrest.remote.GroupRemote;
 import lombok.AllArgsConstructor;
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -25,7 +22,7 @@ public class PersonService {
     private GroupRemote groupRemote;
 
     public Person create(CreatePerson createPerson) {
-        PersonImpl createdPerson = new PersonImpl(createPerson.getName(), createPerson.getCity(), createPerson.getAge(), new ArrayList<String>() );
+        PersonEntity createdPerson = new PersonEntity(createPerson.getName(), createPerson.getCity(), createPerson.getAge(), new ArrayList<String>() );
         return personRepository.save(createdPerson);
     }
 
